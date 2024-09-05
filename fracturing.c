@@ -10,20 +10,15 @@
 // //********************************************************
 
 #include <stdio.h>
+#include <math.h>
 
+
+double calculateDistance();
 double askForUserInput();
 
 int main (int argc, char **argv) {
 
-    double x1;
-    double y1;
-    double x2;
-    double y2;
-
-    x1, y1 = askForUserInput();
-
-
-    //double calculateDistance();
+    calculateDistance();
     //double calculatePerimeter();
     //double calculateArea();
     //double calculateWidth();
@@ -34,15 +29,26 @@ int main (int argc, char **argv) {
 
 double askForUserInput()
 {
-    double x;
-    double y;
+    double a;
+    
+    scanf("%lf", &a);
+    return a;
+}
+double calculateDistance()
+{
+    
+    double x1 = askForUserInput();
+    double y1 = askForUserInput();
+    double x2 = askForUserInput();
+    double y2 = askForUserInput();
+    double distance;
+    distance = sqrt(pow(x2-x1,2)+pow(y2-y1, 2));
+    printf("Point #1 entered: x1 = %.2fl; y1 = %.2lf", x1, y1);
+    printf("Point #1 entered: x1 = %.2fl; y2 = %.2lf", x1, y2);
 
-    printf("Enter x: ");
-    scanf("%lf", &x); 
-    printf("Enter y: ");
-    scanf("%lf", &y);
+    printf("The distance between the two points is: %.2lf", distance);
 
-    return  x, y;
+    return distance;
 }
 
 /*double calculateDistance();
