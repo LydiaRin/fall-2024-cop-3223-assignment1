@@ -12,15 +12,20 @@
 #include <stdio.h>
 #include <math.h>
 
+#define PI 3.14159
+
 
 double calculateDistance();
+double calculatePerimeter();
+double calculateArea();
 double askForUserInput();
+void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2);
 
-int main (int argc, char **argv) {
 
-    calculateDistance();
-    //double calculatePerimeter();
-    //double calculateArea();
+int main (int argc, char **argv) 
+{
+    calculatePerimeter();
+    calculateArea();
     //double calculateWidth();
     //double calculateHeight();
 
@@ -30,64 +35,56 @@ int main (int argc, char **argv) {
 double askForUserInput()
 {
     double a;
-    
     scanf("%lf", &a);
     return a;
 }
+
+void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
+{
+    printf("Enter x1:");
+    *x1 = askForUserInput();
+    printf("Enter y1:");
+    *y1 = askForUserInput();
+    printf("Enter x2:");
+    *x2 = askForUserInput();
+    printf("Enter y2:");
+    *y2 = askForUserInput();
+    printf("Point #1 entered: x1 = %.2lf; y1 = %.2lf\n", *x1, *y1);
+    printf("Point #2 entered: x1 = %.2lf; y2 = %.2lf\n", *x1, *y2);
+}
+
 double calculateDistance()
 {
-    
-    double x1 = askForUserInput();
-    double y1 = askForUserInput();
-    double x2 = askForUserInput();
-    double y2 = askForUserInput();
-    double distance;
-    distance = sqrt(pow(x2-x1,2)+pow(y2-y1, 2));
-    printf("Point #1 entered: x1 = %.2fl; y1 = %.2lf", x1, y1);
-    printf("Point #1 entered: x1 = %.2fl; y2 = %.2lf", x1, y2);
+    double x1, y1, x2, y2, distance;
 
-    printf("The distance between the two points is: %.2lf", distance);
+    GetAndPrintTwoPoints(&x1, &y1, &x2, &y2);
+
+    distance = sqrt(pow(x2-x1,2)+pow(y2-y1, 2));
+
+    printf("The distance between the two points is: %.2lf\n", distance);
 
     return distance;
 }
+double calculatePerimeter()
+{
+    double x1, y1, x2, y2, perimiter, distance;
+    distance = calculateDistance();
+    perimiter = PI * distance;
 
-/*double calculateDistance();
-• Arguments: This function have no arguments.
-• Output: This function should output three lines of text.
-– Point #1 entered: x1 = -whatever was entered-; y1
-= -whatever was entered-
-– Point #2 entered: x2 = -whatever was entered-; y2
-= -whatever was entered-
-– The distance between the two points is -whatever is
-computed-
-• Return: A double representing the distance.
-double calculatePerimeter();
-• Arguments: This function have no arguments.
-• Output: This function should output two lines of text.
-– Point #1 entered: x1 = -whatever was entered-; y1
-= -whatever was entered-
-– Point #2 entered: x2 = -whatever was entered-; y2
-= -whatever was entered-
-– The perimeter of the city encompassed by your request
-is -whatever is computed-
-• Return: A double indicating how difficult you found to
-do this function on a scale of 1.0 through 5.0 where 1 is
-easy and 5 is hard
-• Disclaimer: Must use a function (like calculateDistance)
-within to avoid repeating code.
-double calculateArea();
-5
-• Arguments: This function have no arguments.
-• Output: This function should output three lines of text
-– Point #1 entered: x1 = -whatever was entered-; y1
-= -whatever was entered-
-– Point #2 entered: x2 = -whatever was entered-; y2
-= -whatever was entered-
-– The area of the city encompassed by your request is
--whatever is computed-
-• Return: A double indicating how difficult you found to
-do this function on a scale of 1.0 through 5.0 where 1 is
-easy and 5 is hard
+    printf("The perimeter of the city encompassed by your request is %.2lf\n", perimiter);
+    return 2;
+}
+
+
+double calculateArea()
+{
+    double x1, y1, x2, y2, area, distance;
+    distance = calculateDistance();
+    area = pow((distance/2), 2) * PI;
+    printf("The area of the city encompassed by your request is %.2lf\n", area); 
+    return 1;
+}
+
 • Disclaimer: Must use a function (like calculateDistance)
 within to avoid repeating code.
 double calculateWidth();
