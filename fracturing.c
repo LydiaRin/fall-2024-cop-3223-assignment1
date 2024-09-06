@@ -85,7 +85,7 @@ double calculateArea()
     return 1;
 }
 
-• Disclaimer: Must use a function (like calculateDistance)
+/*• Disclaimer: Must use a function (like calculateDistance)
 within to avoid repeating code.
 double calculateWidth();
 • Arguments: This function have no arguments.
