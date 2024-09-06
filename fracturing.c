@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 #define PI 3.14159
 
@@ -18,16 +19,21 @@
 double calculateDistance();
 double calculatePerimeter();
 double calculateArea();
+double calculateWidth();
+double calculateHeight();
 double askForUserInput();
 void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2);
 
 
 int main (int argc, char **argv) 
 {
+    double distance = calculateDistance();
+    printf("The distance between the two points is: %.2lf\n", distance);
+
     calculatePerimeter();
     calculateArea();
-    //double calculateWidth();
-    //double calculateHeight();
+    calculateWidth();
+    calculateHeight();
 
     return 0;
 } //main
@@ -61,8 +67,6 @@ double calculateDistance()
 
     distance = sqrt(pow(x2-x1,2)+pow(y2-y1, 2));
 
-    printf("The distance between the two points is: %.2lf\n", distance);
-
     return distance;
 }
 double calculatePerimeter()
@@ -85,29 +89,19 @@ double calculateArea()
     return 1;
 }
 
-/*• Disclaimer: Must use a function (like calculateDistance)
-within to avoid repeating code.
-double calculateWidth();
-• Arguments: This function have no arguments.
-• Output: This function should output three lines of text
-– Point #1 entered: x1 = -whatever was entered-; y1
-= -whatever was entered-
-– Point #2 entered: x2 = -whatever was entered-; y2
-= -whatever was entered-
-– The width of the city encompassed by your request
-is -whatever is computed-
-• Return: A double indicating how difficult you found to
-do this function on a scale of 1.0 through 5.0 where 1 is
-easy and 5 is hard
-double calculateHeight();
-• Arguments: This function have no arguments.
-• Output: This function should output three lines of text
-– Point #1 entered: x1 = -whatever was entered-; y1
-= -whatever was entered-
-– Point #2 entered: x2 = -whatever was entered-; y2
-= -whatever was entered-
-– The height of the city encompassed by your request
-is -whatever is computed-
-• Return: A double indicating how difficult you found to
-do this function on a scale of 1.0 through 5.0 where 1 is
-easy and 5 is hard */
+double calculateWidth()
+{
+    double x1, y1, x2, y2, width;
+    GetAndPrintTwoPoints(&x1,&y1, &x2, &y2);
+    width = abs(x2 - x1);
+    printf("The area of the city encompassed by your request is %.2lf\n", width);
+    return 1;
+}
+double calculateHeight()
+{
+    double x1, y1, x2, y2, height;
+    GetAndPrintTwoPoints(&x1,&y1, &x2, &y2);
+    height = abs(y2-y1);
+    printf("The height of the city encompassed by your request is %.2lf\n", height);
+    return 1;
+}
