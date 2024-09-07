@@ -54,22 +54,44 @@ double askForUserInput()
 // void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
 //
 // Purpose: Reads two points of coordinatex(x, y) from the user.
-// Output: promts to enter correct value
-// Precondition: User must provide valid numerical values.
+// Output: Point's coordinates.
+// Precondition: User must provide valid numerical values and
+//               values haven't already been stored in x1, x2, y1, y2.
 // Postcondition: User's inputs are stored in the locations
-//               pointed to by x1, y1, x2, y2
+//               pointed to by x1, y1, x2, y2, 
 //********************************************************
 
 void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
 {
-    printf("\nEnter x1: ");
-    *x1 = askForUserInput();
-    printf("Enter x2: ");
-    *x2 = askForUserInput();
-    printf("Enter y1: ");
-    *y1 = askForUserInput();
-    printf("Enter y2: ");
-    *y2 = askForUserInput();
+    static int pointsStored = 0;  // Keeps track of whether points are already stored
+    static double storedX1, storedY1, storedX2, storedY2;
+
+    if (!pointsStored) {
+        printf("\nEnter x1: ");
+        *x1 = askForUserInput();
+        storedX1 = *x1;
+        printf("Enter x2: ");
+        *x2 = askForUserInput();
+        storedX2 = *x2;
+        printf("Enter y1: ");
+        *y1 = askForUserInput();
+        storedY1 = *y1;
+        printf("Enter y2: ");
+        *y2 = askForUserInput();
+        storedY2 = *y2;
+        pointsStored = 1;
+    }
+    else
+    {
+        *x1 = storedX1;
+        *y1 = storedY1;
+        *x2 = storedX2;
+        *y2 = storedY2;   
+    }
+    
+    printf("Point #1 entered: x1 = %.2lf; y1 = %.2lf\n", *x1, *y1);
+    printf("Point #2 entered: x2 = %.2lf; y2 = %.2lf\n", *x2, *y2);
+    
 }
 
 //********************************************************
@@ -78,21 +100,20 @@ void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
 // Purpose: Calculates the distance between two points.
 // Output: distance between points
 // Precondition: getAndPrintPoints() correctly implemented.
-// Postcondition: Distance is returned
+//               Distance hasn't been calculated yet.
+// Postcondition: Distance is calculated and returned
 //********************************************************
 
 double calculateDistance()
 {
-    double x1, y1, x2, y2, distance;
-
+    static double distance = 0.0;
+    double x1, y1, x2, y2;
     GetAndPrintTwoPoints(&x1, &y1, &x2, &y2);
-    
-    printf("Point #1 entered: x1 = %.2lf; y1 = %.2lf\n", x1, y1);
-    printf("Point #2 entered: x2 = %.2lf; y2 = %.2lf\n", x2, y2);
-
-    distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)); 
-    printf("The distance between the two points is: %.3lf\n", distance); 
-
+    if(distance == 0)
+    {
+        distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)); 
+        printf("The distance between the two points is: %.3lf\n", distance);
+    }
     return distance;
 }
 
