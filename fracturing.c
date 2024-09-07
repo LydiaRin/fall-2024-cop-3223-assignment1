@@ -38,8 +38,9 @@ int main (int argc, char **argv)
 
 //********************************************************
 // double askForUserInput()
-// Purpose: Reads a double value from the user.
-// Output: The user input value.
+// Purpose: Reads a double value from the user
+// Output:none
+// Postcondition: returns a
 //********************************************************
 
 double askForUserInput()
@@ -50,14 +51,10 @@ double askForUserInput()
 }
 
 //********************************************************
-// void GetAndPrintTwoPoints(double *x1, double *y1, 
-//                           double *x2, double *y2)
+// void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
 //
-// Purpose: Reads two points (x1, y1, x2, y2) from the user 
-// and prints them.
-// Input: Pointers to x1, y1, x2, y2.
-// Output: Prints the entered points.
-//
+// Purpose: Reads two points of coordinatex(x, y) from the user.
+// Output: promts to enter correct value
 // Precondition: User must provide valid numerical values.
 // Postcondition: User's inputs are stored in the locations
 //               pointed to by x1, y1, x2, y2
@@ -65,12 +62,12 @@ double askForUserInput()
 
 void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
 {
-    printf("Enter x1: ");
+    printf("\nEnter x1: ");
     *x1 = askForUserInput();
-    printf("Enter y1: ");
-    *y1 = askForUserInput();
     printf("Enter x2: ");
     *x2 = askForUserInput();
+    printf("Enter y1: ");
+    *y1 = askForUserInput();
     printf("Enter y2: ");
     *y2 = askForUserInput();
 }
@@ -79,12 +76,9 @@ void GetAndPrintTwoPoints(double *x1, double *y1, double *x2, double *y2)
 // double calculateDistance()
 //
 // Purpose: Calculates the distance between two points.
-// Output: The calculated distance between the points.
-//
-// Precondition: User must enter valid numerical values for 
-//               x1, y1, x2, y2.
-// Postcondition: Distance between the two points is 
-//                calculated and returned
+// Output: distance between points
+// Precondition: getAndPrintPoints() correctly implemented.
+// Postcondition: Distance is returned
 //********************************************************
 
 double calculateDistance()
@@ -93,11 +87,11 @@ double calculateDistance()
 
     GetAndPrintTwoPoints(&x1, &y1, &x2, &y2);
     
-    printf("\nPoint #1 entered: x1 = %.2lf; y1 = %.2lf\n", x1, y1);
-    printf("Point #2 entered: x2 = %.2lf; y2 = %.2lf\n\n", x2, y2);
+    printf("Point #1 entered: x1 = %.2lf; y1 = %.2lf\n", x1, y1);
+    printf("Point #2 entered: x2 = %.2lf; y2 = %.2lf\n", x2, y2);
 
     distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)); 
-    printf("The distance between the two points is: %.2lf\n", distance); 
+    printf("The distance between the two points is: %.3lf\n", distance); 
 
     return distance;
 }
@@ -105,61 +99,47 @@ double calculateDistance()
 //********************************************************
 // double calculatePerimeter()
 //
-// Purpose: Calculates the perimeter using the distance between two
-//           points as the diameter and prints the result.
-//
-// Precondition: calculateDistance() must be correctly implemented
-//               and return a valid distance value.
-//
-// Postcondition: The perimeter of the city, based on the distance, 
-//                 is calculated and printed.
+// Purpose: Calculates the perimeter.
+// Output: perimiter
+// Precondition: calculateDistance() correctly implemented.
+// Postcondition: The perimeter is calculated.
 //********************************************************
 
 double calculatePerimeter()
 {
-    double x1, y1, x2, y2, perimiter, distance;
+    double perimiter, distance;
     distance = calculateDistance();
     perimiter = PI * distance;
 
-    printf("The perimeter of the city encompassed by your request is %.2lf\n\n", perimiter);
+    printf("The perimeter of the city encompassed by your request is %.3lf\n", perimiter);
     return 2.0; //difficulty rating
 }
 
 //********************************************************
 // double calculateArea()
 //
-// Purpose: Calculates the area of a circle using the distance 
-//          between two points as the diameter and prints the
-//          results.
-//
-// Precondition: calculateDistance() must be correctly implemented 
-//                and return a valid distance value.
-//
-// Postcondition: The area of the circle, based on the diameter provided
-//                by calculateDistance(), is calculated and printed.
+// Purpose: Calculates the area of a circle.
+// Output: area
+// Precondition: calculateDistance() correctly implemented.
+// Postcondition: Area of the circle is calculated.
 //********************************************************
 
 double calculateArea()
 {
-    double x1, y1, x2, y2, area, distance;
+    double area, distance;
     distance = calculateDistance();
     area = pow((distance/2), 2) * PI;
-    printf("The area of the city encompassed by your request is %.2lf\n\n", area); 
+    printf("The area of the city encompassed by your request is %.3lf\n", area); 
     return 2.0; //difficulty rating
 }
 
 //********************************************************
 // double calculateWidth()
 //
-// Purpose: Calculates the width between two points using 
-//          their x-coordinates and prints results.
-//
-// Precondition: The function GetAndPrintTwoPoints() must be 
-//               correctly implemented.
-//
-// Postcondition: The width, defined as the absolute difference 
-//                between the x-coordinates of the two points, 
-//                is calculated and printed.
+// Purpose: Calculates the width between two points.
+// Output: width
+// Precondition: GetAndPrintTwoPoints() correctly implemented.
+// Postcondition: The width is calculated.
 //********************************************************
 
 double calculateWidth()
@@ -167,22 +147,17 @@ double calculateWidth()
     double x1, y1, x2, y2, width;
     GetAndPrintTwoPoints(&x1, &y1, &x2, &y2);
     width = abs(x2 - x1);
-    printf("The width of the city encompassed by your request is %.2lf\n\n", width);
+    printf("The width of the city encompassed by your request is %.3lf\n", width);
     return 1.5; //difficulty rating
 }
 
 //********************************************************
 // double calculateHeight()
 //
-// Purpose: Calculates the height between two points using 
-//          their y-coordinates and prints results.
-//
-// Precondition: The function GetAndPrintTwoPoints() must be 
-//               correctly implemented.
-//
-// Postcondition: The height, defined as the absolute difference 
-//                between the y-coordinates of the two points, 
-//                is calculated and printed.
+// Purpose: Calculates the height between two points.
+// Output: height
+// Precondition: GetAndPrintTwoPoints() correctly implemented
+// Postcondition: The height is calculated,     
 //********************************************************
 
 double calculateHeight()
@@ -190,6 +165,6 @@ double calculateHeight()
     double x1, y1, x2, y2, height;
     GetAndPrintTwoPoints(&x1, &y1, &x2, &y2);
     height = abs(y2 - y1);
-    printf("The height of the city encompassed by your request is %.2lf\n\n", height);
+    printf("The height of the city encompassed by your request is %.3lf\n", height);
     return 1.0; //difficulty rating
 }
